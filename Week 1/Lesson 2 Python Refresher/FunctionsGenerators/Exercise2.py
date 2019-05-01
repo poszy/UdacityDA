@@ -28,6 +28,7 @@ incorrect5 = [ [1, 1.5],
                [1.5, 1]]
 squareList = []
 def check_sudoku(squareList):
+    if
     return squareList
 # Define a function check_sudoku() here:
 
