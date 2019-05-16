@@ -43,3 +43,5 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+def getCalls():
+    
