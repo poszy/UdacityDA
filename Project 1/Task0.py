@@ -21,9 +21,22 @@ Print messages:
 """
 # Prints first record of texts, I am not sure if there was a range of text (first ten records)
 # So I am only printing out the first records
-print texts[0]
+print ("First record of texts, "
+       + str(texts[0][0])[1:-1]
+       + " texts "
+       + str(texts[0][1])[1:-1]
+       + " at time "
+       + str(texts[0][2])[1:-1] )
 
 # Prints out the last record in calls. 
-print calls[-1]
+print ("Last Record of calls, "
+       + str(calls[-1][0])[1:-1]
+       + " calls "
+       + str(calls[-1][1])[1:-1]
+       + " at time, "
+       + str(calls[-1][2])[1:-1]
+       + " lasting "
+       + str(calls[-1][3])[1:-1]
+       + " seconds" )
 
 # Also I am not sure if the list element  [] brackets are needed in the output so I just left them.
