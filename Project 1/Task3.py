@@ -33,16 +33,6 @@ Print the answer as part of a message:
 "The numbers called by people in Bangalore have codes:"
  <list of codes>
 The list of codes should be print out one per line in lexicographic order with no duplicates.
-
-Part B: What percentage of calls from fixed lines in Bangalore are made
-to fixed lines also in Bangalore? In other words, of all the calls made
-from a number starting with "(080)", what percentage of these calls
-were made to a number also starting with "(080)"?
-
-Print the answer as a part of a message::
-"<percentage> percent of calls from fixed lines in Bangalore are calls
-to other fixed lines in Bangalore."
-The percentage should have 2 decimal digits
 """
 
 ## Part A
@@ -155,7 +145,76 @@ def orderCodes(codes):
 
 print ("Part A: \nThe numbers called by people in Bangalore have codes:")
 orderCodes(finalCodes)
+print ("***************************************************************")
 
 
 
+#####
+##### PART B
+#####
 
+"""
+Part B: What percentage of calls from fixed lines in Bangalore are made
+to fixed lines also in Bangalore? In other words, of all the calls made
+from a number starting with "(080)", what percentage of these calls
+were made to a number also starting with "(080)"?
+
+Print the answer as a part of a message::
+"<percentage> percent of calls from fixed lines in Bangalore are calls
+to other fixed lines in Bangalore."
+The percentage should have 2 decimal digits
+"""
+# Get numbers that call out
+## Filter for fixed 080
+
+cCallers = []
+def getCallers(uniqueList, recordType):
+
+  i = 0
+  for item in range (len (recordType)):
+    uniqueList.append(recordType[i][0])
+    i = i + 1
+
+  list080 = [z for z in uniqueList if z.startswith('(080)')]
+  #print len(list080) #1080
+  return list080
+
+# Get numbers recieving call
+# Filter for fixed 080
+cReceivers = []
+def getCallReceivers(uniqueList, recordType):
+
+  i = 0
+  for item in range (len (recordType)):
+    uniqueList.append(recordType[i][1])
+    i = i + 1
+
+  list080 = [z for z in uniqueList if z.startswith('(080)')]
+  #print len(list080) #1131
+  
+  return list080
+
+finalCallRecievers = getCallReceivers(cReceivers,calls)
+finalCallers       = getCallers(cCallers, calls)
+
+  
+# Get len of master list and divide that by total number of calls ( len of calls)
+# format two decimals
+def getCallPercentage(callers,recivers):
+    
+    #Get the total amount of calling and receicing and convert to float.
+    callAmount = float(len(callers))
+    recievingAmount = float(len(recivers))
+
+    #Divide calls outgoing by calls incoming and multiple by 100 to get a solid percentage
+    callPercentage = (callAmount / recievingAmount) * 100
+
+    #round the percentage by 2 
+    callPercentageRounded = round(callPercentage,2)
+    print( str(callPercentageRounded)
+           + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+    
+print ("PART B: ")
+getCallPercentage(finalCallers, finalCallRecievers)
+    
+    
