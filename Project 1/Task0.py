@@ -19,8 +19,7 @@ Print messages:
 "First record of texts, <incoming number> texts <answering number> at time <time>"
 "Last record of calls, <incoming number> calls <answering number> at time <time>, lasting <during> seconds"
 """
-# Prints first record of texts, I am not sure if there was a range of text (first ten records)
-# So I am only printing out the first records
+# Prints first record of texts.
 print ("First record of texts, "
        + str(texts[0][0])[1:-1]
        + " texts "
@@ -39,4 +38,3 @@ print ("Last Record of calls, "
        + str(calls[-1][3])[1:-1]
        + " seconds" )
 
-# Also I am not sure if the list element  [] brackets are needed in the output so I just left them.
