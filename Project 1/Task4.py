@@ -39,75 +39,49 @@ receive texts or receive incoming calls.
 -------
 
 """
-
-callingNumbers = []
-textingNumbers = []
-textReceivers  = []
-callReceivers  = []
-def getCallingNumbers(uniqueList, recordType):
-
-
+# This function will strip calls or texts record type
+# and add them to their own list
+# Param 1: takes an index to parse the desired col.
+# Param 2: takes in a list of calls or text
+def getCallText(index, recordType):
+    
+  # I need a list add the desired col
+  uniqueList = []
   i = 0
+
+  # Loop through calls or text and add the col based of index
+  # to the list
   for item in range (len (recordType)):
-    uniqueList.append(recordType[i][0])
+    uniqueList.append(recordType[i][index])
     i = i + 1
-  #print len(uniqueList)
+
   return uniqueList
 
-# Get numbers that send texts and compare them to the numbers that are calling
-# If there are numbers that are the same, delete them from the list.
-textingNumbers = []
-def getTextingNumbers(uniqueList, recordType):
-  i = 0
-  for item in range(len(recordType)):
-    uniqueList.append(recordType[i][0])
-    i = i + 1
-  #print len(uniqueList)
-  return uniqueList
+# Set variables equal to number lists I am stripping from calling or texting numbers.
+CallingNumbers   = getCallText(0, calls)
+CallRecievers    = getCallText(1,calls)
 
-def getTextRecievers(uniqueList, recordType):
-  i = 0
-  for item in range(len(recordType)):
-    uniqueList.append(recordType[i][1])
-    i = i + 1
-  #print len(uniqueList)
-  return uniqueList
+TextRecievers    = getCallText(0,texts)
+TextingNumbers   = getCallText(1, texts)
 
-def getCallReceivers(uniqueList, recordType):
-
-  i = 0
-  for item in range (len (recordType)):
-    uniqueList.append(recordType[i][1])
-    i = i + 1
-  #print len(uniqueList)
-  return uniqueList
-
-
-# Set variables equal to number lists I am stripping from calling numbers.
-finalCallingNumbers   = getCallingNumbers(callingNumbers, calls)
-finalTextingNumbers   = getTextingNumbers(textingNumbers, texts)
-finalTextRecievers    = getTextRecievers(textReceivers,texts)
-finalCallRecievers    = getCallReceivers(callReceivers,calls)
-
-
+# This function strips away non telemarketer numbers
+# Param 1-4: takes in the list of CallingNumber,CallRecievers,TextRecivers,TextingNumbers
 def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
     
   # New list that will contain texting numbers removed from calling numbers
   # If calling numbers are not in Texting numbers
   # add them to a new list, cause if they are they do not belong to telemarketers
   strippedNumbers = [x for x in cNumbers if x not in tNumbers]
-  #print len(strippedNumbers)
+
 
   # Wash rinse and repeat the process. Now I will strip
   # Numbers that are recieving text from my strippedNumbers list
   # because if any of these numbers are receiving texts, they are not telemarketers.
   nStrippedNumbers = [x for x in strippedNumbers if x not in tReceivers]
-  #print len(nStrippedNumbers)
-
   n1StrippedNumbers = [x for x in nStrippedNumbers if x not in cReceivers]
-  #print len(n1StrippedNumbers)
+  
 
-  # Now to remove any duplicates
+  # Now to remove any duplicates from the stripped numbers
   rDuplicated = []
   for number in n1StrippedNumbers:
         if number not in rDuplicated:
@@ -124,7 +98,7 @@ def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
 
 
 print "These numbers could be telemarketers"
-StripNumbersFromCallingNumbers(finalTextingNumbers, finalCallingNumbers, finalTextRecievers, finalCallRecievers)
+StripNumbersFromCallingNumbers(TextingNumbers,CallingNumbers,TextRecievers,CallRecievers)
 
 """
 Print a message:
