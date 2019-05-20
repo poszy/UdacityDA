@@ -32,23 +32,26 @@ September 2016.".
 # and add them to the total time (number is col 4), which again is not specific if the time is in,
 # Hours or minutes or seconds. I am going to assum these calls are ebing accounted for in Seconds.
 
-
-
-# Variables to hold the trimmed down versions of the columns
+# Variables to hold the trimmed down versions of the columns. answeringNumber,
+# timeAnswerd + timeSpend in seconds.
 answeringNumber = []
 timeAnswered = []
 timeSpent = []
 
+# This function pulls in the calls list and trims it down to a specific col
+# answeringNumber,timeAnswerd + timeSpend in seconds.
+# Param 1: this param takes in a list dedicated to answeringNumber,timeAnswerd + timeSpend in seconds
+# Param 2: takes in the calls list
+# Param 3: colNumber can be changed to parse the desired col fromansweringNumber,timeAnswerd + timeSpend in seconds
 def trimListToCol(uniqueList, recordType, colNumber):
 
+  # Iterator that increases on col index.
   i = 0
-  #x = 0
+  # loop through calls list
   for item in range (len (recordType)):
-
+    # add the index to list.  
     uniqueList.append(recordType[i][colNumber])
-    #uniqueList.append(recordType[x][1])
     i = i + 1
-    #x = x + 1
 
   return uniqueList
 
@@ -58,75 +61,83 @@ def trimListToCol(uniqueList, recordType, colNumber):
 # Because of this delema I will only parse the seconds from the timestamp and assume
 # this is a reasonable amount of seconds it took someone to answer the phone.
 
-def trimSecondsFromTimeAnswered(timeAnsweredList):
+# Param 1: takes the previously stripped timeAnswered list and will
+# parse the seconds from the timestamp
+def trimSecondsFromTimeAnswered(timeAnswered):
 
-  seconds = []
+  # Var to hold seconds and iterator
+  finalSeconds = []
   i = 0
-  fList = []
+   
   #parse the seconds and add them to a list
-  for item in range(len(timeAnsweredList)):
-      secondss = timeAnsweredList[i]
-      s = secondss.rsplit(':',1)[1]
-      fList.append(s)
+  for item in range(len(timeAnswered)):
+
+      #Parse the seconds and add them to the finalSeconds list.
+      seconds = timeAnswered[1].rsplit(':',1)[1]
+      finalSeconds.append(seconds)
       i = i + 1
-  return fList
+  return finalSeconds
 
-# Adds the trimed time in seconds from trimSecondsFromTimeAnswered and what is already present
+
+# Adds the trimed seconds from trimSecondsFromTimeAnswered and what is already present
 # inside the timeSpentList
-def addSecondsToTimeSpent(secondsList,timeSpentList):
+# Param 1: seconds is the seconds list from the previous trimSecondsFromTimeAnswered function
+# Param 2: timespent is the total time spent from the trimSecondsFromTimeAnswered funciton
+def addSecondsToTimeSpent(seconds,timeSpent):
 
+  # Vars to hold the lists
   finalTimeSpent = []
-  convertedSecondsList = []
-  convertedTimeSpentList = []
+  convertedSeconds = []
+  convertedTimeSpent = []
+
+  # I need two iterators for secondsList and timeSpent
   i = 0
   j = 0
+  
   # I must convert both lists to intergers before I can
   # add both coresponding indexes together to get final seconds.
-  for item in range(len(secondsList)):
-    #print ('hello')
-    secondsList[i] = int(secondsList[i])
-    convertedSecondsList.append(secondsList[i])
+  for item in range(len(seconds)):
+    seconds[i] = int(seconds[i])
+    convertedSeconds.append(seconds[i])
     i = i + 1
 
-  for item in range(len(timeSpentList)):
-    timeSpentList[j] = int(timeSpentList[j])
-    convertedTimeSpentList.append(timeSpentList[j])
+  for item in range(len(timeSpent)):
+    timeSpent[j] = int(timeSpent[j])
+    convertedTimeSpent.append(timeSpent[j])
     j = j + 1
 
   # Now that the lists are converted I can add their indexes safley
   # and add them to their own list.
-
-  finalTimeSpent = [x + y for x, y in zip(convertedSecondsList,convertedTimeSpentList)]
+  finalTimeSpent = [x + y for x, y in zip(convertedSeconds,convertedTimeSpent)]
   
-  #print convertedSecondsList[-1]
-  #print convertedTimeSpentList[-1]
-  #print finalTimeSpent[-1]
   return finalTimeSpent
 
 
-# Since all list have not been altred in order it is safe to assume I can add
+# Since the lists have not been altred in order it is safe to assume I can add
 # the trimmed and added time list to the answering number list and have the values and indexes
 # correlated correctly
-def organizeFilterFinalNumber(answeringNumberList, finalTimeSpent):
+# Param 1: takes in the answeringNumber list from trimSecondsFromTimeAnswered function.
+# Param 2: takes in the finalTimeSpent list from addSecondsToTimeSpent
+def organizeFilterFinalNumber(answeringNumber, finalTimeSpent):
   
   # Converting to Tuple for ease and do not have to worry about alterting any more data
-  finalNumberTuple = tuple(zip(answeringNumberList, finalTimeSpent))
+  finalNumber = tuple(zip(answeringNumber, finalTimeSpent))
+  
   # now I wil sort the list according to the second col (time) and highest value and
   # return the first row/col that is on top.
+  last = max(finalNumber,key=itemgetter(1))
   
-  
-  last = max(finalNumberTuple,key=itemgetter(1))
   print "Phone number %s spent the longest time %s seconds, on the phone during September 2016." % last
-##
-##### Trim Down each col and assign them to a Var
-###
-fAnsweringNumberList = trimListToCol(answeringNumber, calls, 1)
-timeAnsweredList = trimListToCol(timeAnswered, calls, 2)
-timeSpentList    = trimListToCol(timeSpent, calls, 3)
+  
+
+# Trim down each col and assign them to a ref var
+fAnsweringNumber = trimListToCol(answeringNumber, calls, 1)
+timeAnswered     = trimListToCol(timeAnswered, calls, 2)
+timeSpent        = trimListToCol(timeSpent, calls, 3)
 
 # Seconds trimmed fromtimeAnsweredList
-secondsList = trimSecondsFromTimeAnswered(timeAnsweredList)
+seconds = trimSecondsFromTimeAnswered(timeAnswered)
 
 # Fintal time spend based off of added trimmed seconds and seconds List
-finalTimeSpent = addSecondsToTimeSpent(secondsList,timeSpentList)
-organizeFilterFinalNumber(fAnsweringNumberList, finalTimeSpent)
+finalTimeSpent = addSecondsToTimeSpent(seconds,timeSpent)
+organizeFilterFinalNumber(fAnsweringNumber, finalTimeSpent)
