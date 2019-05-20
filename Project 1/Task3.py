@@ -43,37 +43,42 @@ The list of codes should be print out one per line in lexicographic order with n
 # 3) get fixed numbers these start with paretheis ()
 # 4) add number list and order them in lexicographic order
 
+# 0) Get all calling numbers, these will be filtered out in the next step
+# Param 1: takes in calls 
+def getCallers(recordType):
 
-#0) get all calling numbers, tehse will be filtered out in the next step
-callers = []
-def getCallers(uniqueList, recordType):
-
+  # Callers list to be turned
+  callers = []
   i = 0
   for item in range (len(recordType)):
-    uniqueList.append(recordType[i][0])
+    callers.append(recordType[i][0])
     i = i + 1
-  #print len(uniqueList)
-  return uniqueList
+  
+  return callers
 
-callerList = getCallers(callers,calls)
+callerList = getCallers(calls)
 
 # 1) get mobile numbers
+# Param 1: takes in callsList from getCallers function
 def filterMobileNumbers(callList):
-    #filteredList = [ s for s in callList if any (i in s for i in filters)]
+    
     # Get mobile numbers that start with 7,8,9
     list7 = [i for i in callList if i.startswith('7')]
     list8 = [j for j in callList if j.startswith('8')]
     list9 = [x for x in callList if x.startswith('9')]
-    combinedList = list7 + list8 + list9
 
+    # Combine all List
+    combinedList = list7 + list8 + list9
+    
     finalMobileAreaCodes = []
     mobileAreaCodes = []
+
+    # I need to iterator over combined list index
     j = 0
     for i in range(len(combinedList)):
         mobileAreaCodes.append( combinedList[j][:4] )
         j = j + 1
     
-    #print mobileAreaCode
     # only add unique area codes to final list
     finalMobileAreaCodes = []
     for e in mobileAreaCodes:
@@ -82,10 +87,11 @@ def filterMobileNumbers(callList):
     return finalMobileAreaCodes
 
 
-#2) get Telemarketers line number codes
+# 2) Get Telemarketers line number codes
 # I didnt really need to do this, I could have just added + 140 to the end result
 # but here is the filter helper function to find are code 140
 def filterTelemarketerNumbers(callList):
+    
     # get telemarketer numbers
     list140 = [y for y in callList if y.startswith('140')]
 
@@ -96,7 +102,6 @@ def filterTelemarketerNumbers(callList):
         teleAreaCodes.append( list140[j][:3] )
         j = j + 1
     
-    #print teleAreaCodes
     # only add unique area codes to final list
     finalTeleAreaCodes = []
     for e in teleAreaCodes:
@@ -118,8 +123,6 @@ def filterFixedNumbers(callList):
         fixedAreaCode = list0[index].split(')',1)[0]
         fixedAreaCodes.append(fixedAreaCode)
         index = index + 1
-
-
 
     # only add unique area codes to final list
     finalFixedAreaCode = []
@@ -164,42 +167,35 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
-# Get numbers that call out
-## Filter for fixed 080
 
-cCallers = []
-def getCallers(uniqueList, recordType):
 
+# Get numbers of callers or revcivers and filter for fixed 080 area codes
+# Param 1: takes in calls list
+# Takes in an index. 0 for callers and 1 for caller recievers
+def getCallersOrReceivers(recordType, index):
+
+  # List to hold callers from calls and iterator
+  callers = []
   i = 0
+
+  # Loop through and append each call
   for item in range (len (recordType)):
-    uniqueList.append(recordType[i][0])
+    callers.append(recordType[i][index])
     i = i + 1
-
-  list080 = [z for z in uniqueList if z.startswith('(080)')]
-  #print len(list080) #1080
-  return list080
-
-# Get numbers recieving call
-# Filter for fixed 080
-cReceivers = []
-def getCallReceivers(uniqueList, recordType):
-
-  i = 0
-  for item in range (len (recordType)):
-    uniqueList.append(recordType[i][1])
-    i = i + 1
-
-  list080 = [z for z in uniqueList if z.startswith('(080)')]
-  #print len(list080) #1131
+    
+  # Filter for numbers that start with 080
+  list080 = [z for z in callers if z.startswith('(080)')]
   
   return list080
 
-finalCallRecievers = getCallReceivers(cReceivers,calls)
-finalCallers       = getCallers(cCallers, calls)
+# Set Ref vars to the callers and call recivers final list numbers
+finalCallers       = getCallersOrReceivers(calls,0)
+finalCallRecievers = getCallersOrReceivers(calls,1)
 
-  
-# Get len of master list and divide that by total number of calls ( len of calls)
-# format two decimals
+
+# Get len of master list and divide that by total number of calls ( len of calls) & format two decimals
+# Param 1: takes in callers list from getCallersOrReceivers function.
+# Param 2: takes in call recievers list from getCallersOrReceivers function
 def getCallPercentage(callers,recivers):
     
     #Get the total amount of calling and receicing and convert to float.

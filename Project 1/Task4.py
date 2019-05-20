@@ -91,6 +91,7 @@ finalCallRecievers    = getCallReceivers(callReceivers,calls)
 
 
 def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
+    
   # New list that will contain texting numbers removed from calling numbers
   # If calling numbers are not in Texting numbers
   # add them to a new list, cause if they are they do not belong to telemarketers
