@@ -51,10 +51,55 @@ def print_linked_list(head):
 #print (head.next.next.next.next.value)
 
 ## Create a linked list based off of iteration/traversing
+## This is inneficient because everytime we want to add a node,
+## we have to go through all of the previous heads
+## this will make the complexity O(n^2)
+## because we have two loops
+"""def create_linked_list(input_list):
+
+  head = None
+  for i in input_list:
+
+    # start off the List, if its empty, set to first value of input_list[0]
+    if head is None:
+      head = Node(i)
+
+    # else the current node, is equal to the head
+    # firs case: head = 1
+    else:
+      # Move the tail
+      current_node = head
+      # current_node.next is loopable and has elements in it, this will run as long input_list keeps adding indexes
+      while current_node.next:
+        # set the current node to value
+        current_node = current_node.next
+
+      # head.next = node(input_list[xc])
+      current_node.next = Node(i)
+
+
+  return head
+"""
 
 def create_linked_list(input_list):
-    head = None
-    return head
+  head = None
+  tail = None
+
+  for i in input_list:
+
+    # if the list is empty and head of the list is empty
+    if head is None:
+      head = Node(i)
+      tail = head # This sets the tail equal to the value in head, we can update this as we add more nodes
+    else:
+      # if the list if not emtpy, set the head.next = node(i), basically add the new list index value as the new node
+      #
+      tail.next = Node(i)
+      # set the tail equal to the new node. 
+      tail = tail.next
+      
+
+
 
 ### Test Code
 def test_function(input_list, head):
@@ -62,7 +107,7 @@ def test_function(input_list, head):
         if len(input_list) == 0:
             if head is not None:
                 print("Fail")
-                return
+                returncom
         for value in input_list:
             if head.value != value:
                 print("Fail")
@@ -71,18 +116,16 @@ def test_function(input_list, head):
                 head = head.next
         print("Pass")
     except Exception as e:
-        print("Fail: "  + e)
-        
-        
+        print("Fail: "  + str(e))
 
-#input_list = [1, 2, 3, 4, 5, 6]
-#head = create_linked_list(input_list)
-#test_function(input_list, head)
+input_list = [1, 2, 3, 4, 5, 6]
+head = create_linked_list(input_list)
+test_function(input_list, head)
 
-#input_list = [1]
-#head = create_linked_list(input_list)
-#test_function(input_list, head)
+input_list = [1]
+head = create_linked_list(input_list)
+test_function(input_list, head)
 
-#input_list = []
-#head = create_linked_list(input_list)
-#test_function(input_list, head)
+input_list = []
+head = create_linked_list(input_list)
+test_function(input_list, head)
