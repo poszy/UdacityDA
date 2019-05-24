@@ -44,15 +44,44 @@ class LinkedList:
         node.next = Node(value)
         return
 
+
     def search(self, value):
         """ Search the linked list for a node with the requested value and return the node. """
 
-        # TODO: Write function to search here
+        # If the list is empty, return None
+        if self.head is None:
+            return None
 
-        pass
+        # set node equal to the current node head
+        node = self.head
 
+        # while node has elements to iterate
+        while node:
+
+            # if the nodes current value is equal to the passed value
+            # return it
+            if node.value == value:
+                return node
+            # if it does not, set the current node to the next,
+            node = node.next
+
+   
     def remove(self, value):
         """ Remove first occurrence of value. """
+        if self.head is None:
+            return
+
+        if self.head.value == value:
+            self.head = self.head.next
+            return
+
+        node = self.head
+        while node.next:
+            if node.next.value == value:
+                node.next == node.next.next
+
+                return
+            node = node.next
 
         # TODO: Write function to remove here
 
@@ -63,6 +92,13 @@ class LinkedList:
 
         # TODO: Write function to pop here
 
+        if self.head is None:
+            return None
+
+        node = self.head
+        self.head = self.head.next
+        return node.value
+
         pass
 
     def insert(self, value, pos):
@@ -70,15 +106,39 @@ class LinkedList:
             length of the list, append to the end of the list. """
 
         # TODO: Write function to insert here
+        """ Insert value at pos position in the list. If pos is larger than the
+            length of the list, append to the end of the list. """
+        if pos == 0:
+            self.prepend(value)
+            return
+
+        index = 0
+        node = self.head
+        while node.next and index <= pos:
+            if (pos - 1) == index:
+                new_node = Node(value)
+                new_node.next = node.next
+                node.next = new_node
+                return
+
+            index += 1
+            node = node.next
+        else:
+            self.append(value)
 
         pass
 
     def size(self):
         """ Return the size or length of the linked list. """
+        size = 0
+        node = self.head
+        while node:
+            size += 1
+            node = node.next
 
-       # TODO: Write function to get size here
+        return size
 
-        pass
+
 
     def to_list(self):
         out = []
@@ -98,13 +158,15 @@ assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
 linked_list.append(3)
 linked_list.prepend(2)
 assert linked_list.to_list() == [2,1,3], f"list contents: {linked_list.to_list()}"
-"""
+
+
 # Test append
 linked_list = LinkedList()
 linked_list.append(1)
 assert linked_list.to_list() == [1], f"list contents: {linked_list.to_list()}"
 linked_list.append(3)
 assert linked_list.to_list() == [1, 3], f"list contents: {linked_list.to_list()}"
+
 
 # Test search
 linked_list.prepend(2)
@@ -114,6 +176,8 @@ linked_list.append(3)
 assert linked_list.search(1).value == 1, f"list contents: {linked_list.to_list()}"
 assert linked_list.search(4).value == 4, f"list contents: {linked_list.to_list()}"
 
+
+"""
 # Test remove
 linked_list.remove(1)
 assert linked_list.to_list() == [2, 1, 3, 4, 3], f"list contents: {linked_list.to_list()}"
