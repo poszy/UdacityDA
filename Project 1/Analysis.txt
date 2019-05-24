@@ -1,0 +1,36 @@
+Analysis
+
+Task 0:
+This task was pretty simply I simply was able to get the first record of texts and last record of calls through python's built in dictionary get item[] functionality. This get item[] has a Time complexity of O(1). Although I had to use this 7 times to acquire all of the problems desired outputs. I could have made two for loops that takes each columns index from each set of records (calls & texts) but I think that would have made the time complexity worse. That would also make the code harder to read so I decided to stick to my solution of printing out the record columns one by one. 
+
+Task 1:
+Task1.py was a little more complicated but I was able to break down the process into three functions.I am not sure if I am to add all the complexities together and give one final complexity but I am answering to the best of my ability.
+trimListtoNumber : has complexity 0(n + 4) and is linear. 
+combineList: just adds to list together 0(n)
+filterNumbers : has complexity 0(n + 2) and is is also linear. 
+
+Task 2:
+This task is far more complicated. I believe there could have been a better way to do this, but for the sake of code readability and organization, I sacrificed time complexity. Here are the breakdowns of each function. addSecondsToTimeSpent is by far the worst time function in this program because I have to append and convert seconds with numerous for loops. I could not find another way. 
+trimListToCol : 0(n + 2)
+trimSecondsFromTimeAnswered : 0(n + 4)
+addSecondsToTimeSpent : 0 (n^3 + 5) 
+organizerFilterFinalNumber : 0 (n + 3)
+
+Task 3:
+Task3.py was the longest program and required a lot of functions and for loops to get the desired output. Because of this, there is a lot of room for improvement, but I tried my best to find the fastest solution.
+getCallers : 0 (n + 1)
+filterMobileNumbers : 0(n ^5 + 6) 
+filterTelemarketersNumbers : 0(n^3 + 2)
+filterFixedNumbers : 0 ( n ^3 + 4)
+orderCodes : 0(n + 2)
+getCallersOrRecievers 0 ( n ^2 + 2)
+getCallPercentage : 0(n + 3)
+
+
+Task 4:
+This task was the slowest speed and visual wise. There was a lot of filtering and stripping I had to do to get the telemarketer numbers. Maybe my understanding of the problem was too specific or wrong, but using my best judgement this is how I came up with the solution. StripNumbersFromCallingNumbers function does most of the work and completely slows the execution down. This is because unlike Task3.py (that filterNumber also has the same time complexity) StripNumbersFromCallingNumbers has to filter four lists. Making the execution time lag.
+getCallText : 0(n +1)
+StripNumbersFromCallingNumbers : 0(n ^ 5 + 6 )
+
+
+
