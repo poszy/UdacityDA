@@ -43,8 +43,31 @@ class Stack:
             # add the values to the new double length array.
             self.arr[index] = element
 
+    def size(self):
+      return self.num_elements
+    
+    def is_empty(self):
+      return self.num_elements == 0
+
+    def pop(self):
+
+      #if the stack is empty, set the index to 0
+      if self.is_empty():
+        self.next_index = 0
+
+        # then return none if there are no items in the stack to pop
+        return None
+
+      # if there are items in the stack
+      # we need to decrement this, to get the value on top. because self.next_index has no value
+      self.next_index = self.next_index -1
+
+      # Decrease the amount of elements present. 
+      self.num_elements = self.num_elements - 1
+
+      # return the index that was popped
+      return self.arr[self.next_index]
+
 foo = Stack()
-
-foo.push('this')
-
-print (foo.arr)
+foo.push("Test") # We first have to push an item so that we'll have something to pop
+print(foo.pop()) # Should return the popped item, which is "Test"
