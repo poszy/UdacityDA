@@ -44,7 +44,7 @@ The list of codes should be print out one per line in lexicographic order with n
 # 4) add number list and order them in lexicographic order
 
 # 0) Get all calling numbers, these will be filtered out in the next step
-# Param 1: takes in calls 
+# Param 1: takes in calls
 def getCallers(recordType):
 
   # Callers list to be turned
@@ -53,7 +53,7 @@ def getCallers(recordType):
   for item in range (len(recordType)):
     callers.append(recordType[i][0])
     i = i + 1
-  
+
   return callers
 
 callerList = getCallers(calls)
@@ -61,7 +61,7 @@ callerList = getCallers(calls)
 # 1) get mobile numbers
 # Param 1: takes in callsList from getCallers function
 def filterMobileNumbers(callList):
-    
+
     # Get mobile numbers that start with 7,8,9
     list7 = [i for i in callList if i.startswith('7')]
     list8 = [j for j in callList if j.startswith('8')]
@@ -69,7 +69,7 @@ def filterMobileNumbers(callList):
 
     # Combine all List
     combinedList = list7 + list8 + list9
-    
+
     finalMobileAreaCodes = []
     mobileAreaCodes = []
 
@@ -78,7 +78,7 @@ def filterMobileNumbers(callList):
     for i in range(len(combinedList)):
         mobileAreaCodes.append( combinedList[j][:4] )
         j = j + 1
-    
+
     # only add unique area codes to final list
     finalMobileAreaCodes = []
     for e in mobileAreaCodes:
@@ -91,7 +91,7 @@ def filterMobileNumbers(callList):
 # I didnt really need to do this, I could have just added + 140 to the end result
 # but here is the filter helper function to find are code 140
 def filterTelemarketerNumbers(callList):
-    
+
     # get telemarketer numbers
     list140 = [y for y in callList if y.startswith('140')]
 
@@ -101,13 +101,13 @@ def filterTelemarketerNumbers(callList):
     for i in range(len(list140)):
         teleAreaCodes.append( list140[j][:3] )
         j = j + 1
-    
+
     # only add unique area codes to final list
     finalTeleAreaCodes = []
     for e in teleAreaCodes:
         if e not in finalTeleAreaCodes:
             finalTeleAreaCodes.append(e)
-    return finalTeleAreaCodes 
+    return finalTeleAreaCodes
 
 #3) get Fixed line numbers
 def filterFixedNumbers(callList):
@@ -130,7 +130,7 @@ def filterFixedNumbers(callList):
         if e not in finalFixedAreaCode:
             finalFixedAreaCode.append(e)
     return finalFixedAreaCode
-        
+
 # Set each function to a var
 # that way I can pass them into the orderCodes function
 fCodes = filterFixedNumbers(callerList)
@@ -139,11 +139,11 @@ tCodes  = filterTelemarketerNumbers(callerList)
 finalCodes = fCodes + mCodes + tCodes
 
 def orderCodes(codes):
-    
+
     sortedCodes = sorted(codes, key=str)
     i = 0
     for item in range(len(sortedCodes)):
-        print sortedCodes[i]
+        print (sortedCodes[i])
         i = i + 1
 
 print ("Part A: \nThe numbers called by people in Bangalore have codes:")
@@ -182,11 +182,10 @@ def getCallersOrReceivers(recordType, index):
   for item in range (len (recordType)):
     callers.append(recordType[i][index])
     i = i + 1
-    
+
   # Filter for numbers that start with 080
   list080 = [z for z in callers if z.startswith('(080)')]
-  
-  return list080
+  return (list080)
 
 # Set Ref vars to the callers and call recivers final list numbers
 finalCallers       = getCallersOrReceivers(calls,0)
@@ -197,20 +196,41 @@ finalCallRecievers = getCallersOrReceivers(calls,1)
 # Param 1: takes in callers list from getCallersOrReceivers function.
 # Param 2: takes in call recievers list from getCallersOrReceivers function
 def getCallPercentage(callers,recivers):
-    
-    #Get the total amount of calling and receicing and convert to float.
+
+    # Get the total amount of numbers calling and receicing and convert to float.
     callAmount = float(len(callers))
     recievingAmount = float(len(recivers))
 
-    #Divide calls outgoing by calls incoming and multiple by 100 to get a solid percentage
+    # Divide calls outgoing by calls incoming and multiple by 100 to get a solid percentage
     callPercentage = (callAmount / recievingAmount) * 100
 
-    #round the percentage by 2 
+    # Round the percentage by 2
     callPercentageRounded = round(callPercentage,2)
     print( str(callPercentageRounded)
            + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
-    
+
 print ("PART B: ")
-getCallPercentage(finalCallers, finalCallRecievers)
-    
-    
+#getCallPercentage(finalCallers, finalCallRecievers)
+
+
+def getBalgalorCalls(callers, recievers):
+
+  #Loop through each row and only append to caller list if
+  # A and B start with 080
+  #comparing value of two list
+  i = 0
+  x = 0
+  for index in range(len(callers)):
+    for index2 in range(len(recievers)):
+      if "(080)" in {callers[i],recievers[x]}:
+        print ( callers[i] + " | " + recievers[x] )
+
+        x = x+1
+    i = i + 1
+  #Get the Length of caller list
+
+  #Get the length of origional caller list
+
+  #Divide the caller list by origional caller list to get percentage. 
+
+getBalgalorCalls(finalCallers, finalCallRecievers)

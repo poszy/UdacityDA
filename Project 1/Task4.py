@@ -44,7 +44,7 @@ receive texts or receive incoming calls.
 # Param 1: takes an index to parse the desired col.
 # Param 2: takes in a list of calls or text
 def getCallText(index, recordType):
-    
+
   # I need a list add the desired col
   uniqueList = []
   i = 0
@@ -67,7 +67,7 @@ TextingNumbers   = getCallText(1, texts)
 # This function strips away non telemarketer numbers
 # Param 1-4: takes in the list of CallingNumber,CallRecievers,TextRecivers,TextingNumbers
 def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
-    
+
   # New list that will contain texting numbers removed from calling numbers
   # If calling numbers are not in Texting numbers
   # add them to a new list, cause if they are they do not belong to telemarketers
@@ -79,7 +79,7 @@ def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
   # because if any of these numbers are receiving texts, they are not telemarketers.
   nStrippedNumbers = [x for x in strippedNumbers if x not in tReceivers]
   n1StrippedNumbers = [x for x in nStrippedNumbers if x not in cReceivers]
-  
+
 
   # Now to remove any duplicates from the stripped numbers
   rDuplicated = []
