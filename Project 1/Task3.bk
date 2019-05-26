@@ -147,7 +147,7 @@ def orderCodes(codes):
         i = i + 1
 
 print ("Part A: \nThe numbers called by people in Bangalore have codes:")
-orderCodes(finalCodes)
+#orderCodes(finalCodes)
 print ("***************************************************************")
 
 
@@ -167,48 +167,99 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+
+# Get numbers of callers or revcivers and filter for fixed 080 area codes
+# Param 1: takes in calls list
+# Takes in an index. 0 for callers and 1 for caller recievers
+def getCallersOrReceivers(recordType, index):
+
+  # List to hold callers from calls and iterator
+  callers = []
+  i = 0
+
+  # Loop through and append each call
+  for item in range (len (recordType)):
+    callers.append(recordType[i][index])
+    i = i + 1
+
+  # Filter for numbers that start with 080
+  list080 = [z for z in callers if z.startswith('(080)')]
+  return (list080)
+
+# Set Ref vars to the callers and call recivers final list numbers
+finalCallers       = getCallersOrReceivers(calls,0)
+finalCallRecievers = getCallersOrReceivers(calls,1)
+
+
+# Get len of master list and divide that by total number of calls ( len of calls) & format two decimals
+# Param 1: takes in callers list from getCallersOrReceivers function.
+# Param 2: takes in call recievers list from getCallersOrReceivers function
+def getCallPercentage(callers,recivers):
+
+    # Get the total amount of numbers calling and receicing and convert to float.
+    callAmount = float(len(callers))
+    recievingAmount = float(len(recivers))
+
+    # Divide calls outgoing by calls incoming and multiple by 100 to get a solid percentage
+    callPercentage = (callAmount / recievingAmount) * 100
+
+    # Round the percentage by 2
+    callPercentageRounded = round(callPercentage,2)
+    print( str(callPercentageRounded)
+           + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+
 print ("PART B: ")
+#getCallPercentage(finalCallers, finalCallRecievers)
+
 
 def getBalgalorCalls(calls):
 
-  # List to keep track of (080) numbers calls to other (080) numbers.
+  #Loop through each row and only append to caller list if
+  # A and B start with 080
   callTracker = []
-
-  # Iterator
-  i = 0
+  callers2 = []
   
+  i = 0
+  j = 0
+
   # Loop through calls list
   for item in range (len (calls)):
-      
       # Set two variables for each col index
+
       callers = calls[i][0]
       callRecievers = calls[i][1]
 
       # If both col index's of callers and call recivers start with 080
-      # then add it to the callTracker list
+      # then add it to a callTracker
       if callers.startswith('(080') and callRecievers.startswith('(080)'):
-
           # Since I already know only matching numbers will appear here
-          # I can safely just append only one of the index's, as they come in pairs and cannot exist without another and
-          # Adding both indexes is pointless because I am going to get the length of the list. 
+          # I can safley just add one of the indexes, as they come in pairs and cannot exist without another
+          #print (str(callers) + str(callRecievers))
           
           callTracker.append(callers)
       
-      # Increment the index's, so that I can loop through the entire calls file.
+      # Increment the indexes, so that I can loop through the entire calls file
       i = i + 1
-      
-  # Get the total amount of numbers calling from calls list
-  # Get the total amount of calls made to (080) numbers in list length
-  # Convert Both of these to floats for decimal formatting.
+         
+  #comparing value of two list
+  
+  #Get the Length of caller list
+  print(len(callTracker))
+  #Get the length of origional caller list
+  print(len(calls))
+
+  #Divide the caller list by origional caller list to get percentage.
+  # Get the total amount of numbers calling and receicing and convert to float.
   callAmount = float(len(calls))
   recievingAmount = float(len(callTracker))
 
-  # Divide total calls that were made to (080) numbers by the total amount of calls.
-  # Multiple by 100 to get a solid percentage.
+  # Divide calls outgoing by calls incoming and multiple by 100 to get a solid percentage
   callPercentage = (recievingAmount / callAmount) * 100
 
   # Round the percentage by 2
   callPercentageRounded = round(callPercentage,2)
-  print( str(callPercentageRounded) + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+  print( str(callPercentageRounded)
+           + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
 
 getBalgalorCalls(calls)
