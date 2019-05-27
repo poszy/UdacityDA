@@ -103,4 +103,156 @@ print (say_hello2(2))
 ####
 ####
 
+# Name        Big O
+# ------------------------
+# Constant    O(c)
+# Linear      O(n) OR O(1)
+# Quadratic   O(n^2)
+# Cubic       O(n^3)
+# Exponential O(2^n)
+# Logarithmic O(log(n))
+# Log Linear  O(nlog(n))
+
 ## Refer to hand notes 5/4/19
+
+## Constant Complexity
+## In the above script, irrespective of the input size, or the number of items in the input list items, the algorithm performs only 2 steps:
+## Finding the square of the first element and printing the result on the screen.
+## Hence, the complexity remains constant. If we were to plot this, this would be a straight line. 
+
+def constant_algo(items):  
+    result = items[0] * items[0]
+    print ()
+
+constant_algo([4, 5, 6, 8])  
+
+## Linear Complexity
+## since the number of iterations of the for-loop will be equal to the size of the input items array.
+## For instance, if there are 4 items in the items list, the for-loop will be executed 4 times, and so on.
+
+def linear_algo(items):  
+    for item in items:
+        print(item)
+
+linear_algo([4, 5, 6, 8])
+
+## With linear complexity huge number of inputs the constants become insignificant,
+## For instance, there are two for loops that iterate over the input items list
+## the complexity of the algorithm becaomes O(2n)
+## However in  case of inifinite items in the input list,
+## the twice of inifinity is still equal to nifinity, thereforte we can ignore the constant 2
+## Since it is ultimately insignificant and the complexity of the algorithm becomes O(n)
+def linear_algo(items):  
+    for item in items:
+        print(item)
+
+    for item in items:
+        print(item)
+linear_algo([4, 5, 6, 8])  
+
+
+## Quadratic Complexity O(N^2
+## The steps required to execute this algorithm is a quadratic function of the number of items in the input.
+## We have an outer loop that iterates through all the items in the input list and then a nested inner loop
+## which iterates through all the items in the list.
+## the steps performed are n * n, where n is the number of items in the input array.
+## This plots as a curve.
+def linear_algo(items):  
+    for item in items:
+        print(item)
+
+    for item in items:
+        print(item)
+
+linear_algo([4, 5, 6, 8])  
+
+
+## Finding complexity of complex Functions
+
+def complex_algo(items):
+
+    # The complexity of this part is O(5). Since five constant steps are being performed in this piece of code irrespective of the input.
+    for i in range(5):
+        print ("Python is awesome")
+
+    # We know the complexity of this piece of code is O(n).    
+    for item in items:
+        print(item)
+
+    # Similarly, the complexity of the following piece of code is also O(n)    
+    for item in items:
+        print(item)
+        
+    # Finally, in the following piece of code, a string is being printed three times, hence the complexity is O(3)    
+    print("Big O")
+    print("Big O")
+    print("Big O")
+
+    # To find the overall complexity we simply have to add these individual complexities.
+    # O(5) + O(n) + O(n) + O(3)
+    # =
+    # O(8) + O(2n)
+
+    # In this case 0(2n) is a constant and can be ignored. because inifinity times infiity is also infinity
+    # the final time complexity for this function is O(n)
+    
+complex_algo([4, 5, 6, 8])  
+
+
+
+## Worst vs Best Case Complexity
+## When someone asks you about the complexity of the algorithm he is asking you about the worst case complexity.
+## In this script we have a funciton that takes anumber and a list of numbers as input
+## it returns true if the passed number is found in the list of numbers, otherwise it returns false.
+#### if you search 2 in the list, it will be found in the firt comparison
+#### this is the best case complexity of the algorithm that the searched item is found in the first index.
+#### This best case complexity is 0(1)
+#### on the other hand, if you search 10, it will be in the last index.
+#### hence the algorithm will have to search through all the items in the list, hence the worse case complexity becoimes O(n)
+def search_algo(num, items):  
+    for item in items:
+        if item == num:
+            return True
+        else:
+            return False
+nums = [2, 4, 6, 8, 10]
+
+print(search_algo(2, nums))  
+
+### Logarithmic  Time O(log n)
+## its when an algorithm reduces time complexity when it reduces the size of the input data in each step.
+## each step we are only viewing the index.
+
+for index in range(0, len(data), 3):
+    print(data[index])
+
+## this is common in binary search and binary trees
+def binary_search(data, value):
+    n = len(data)
+    left = 0
+    right = n - 1
+
+while left <= right:
+        middle = (left + right) / 2
+        if value < data[middle]:
+            right = middle - 1
+        elif value > data[middle]:
+            left = middle + 1
+        else:
+            return middle
+
+raise ValueError('Value is not in the list')
+
+if __name__ == '__main__':
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(binary_search(data, 8))
+    
+
+## Quasilinear Time O(n log n)
+## an algorithm is said to have a quasilinear time complexity when each
+## operation in the input data has a logarithm time Complexity
+## it is commonly seen in sorting algorithms ( mergesort, timesort, heapsort)
+
+## For example for each value in the data1 (O(n) use the binary search (O(logn)) to search the same value in data2
+for value in data1:
+    result.append(binary_search(data2, value))

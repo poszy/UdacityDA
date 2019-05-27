@@ -93,11 +93,11 @@ def StripNumbersFromCallingNumbers(tNumbers,cNumbers,tReceivers,cReceivers):
 
   i = 0
   for item in range(len(sortedNumbers)):
-    print sortedNumbers[i]
+    print (sortedNumbers[i])
     i = i + 1
 
 
-print "These numbers could be telemarketers"
+print ("These numbers could be telemarketers")
 StripNumbersFromCallingNumbers(TextingNumbers,CallingNumbers,TextRecievers,CallRecievers)
 
 """

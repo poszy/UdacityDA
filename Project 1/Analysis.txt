@@ -1,36 +1,112 @@
 Analysis
 
 Task 0:
-This task was pretty simply I simply was able to get the first record of texts and last record of calls through python's built in dictionary get item[] functionality. This get item[] has a Time complexity of O(1). Although I had to use this 7 times to acquire all of the problems desired outputs. I could have made two for loops that takes each columns index from each set of records (calls & texts) but I think that would have made the time complexity worse. That would also make the code harder to read so I decided to stick to my solution of printing out the record columns one by one. 
+This task was pretty simple. I simply was able to get the first record of texts and last record of calls through python's built in dictionary get item[] functionality. This get item[] has a time complexity of O(1). I use this twice so the complexity comes out to O(2). 
+
+Since only two operations happened, item[] function 2 times to acquire all of the problems desired outputs.
+- O(1) + O(1) = O(2). Since these are constants, they can be ignored. 
+- The final time complexity of this task comes out to O(n) OR O(c), regardless of the input size or number of items in the list, this algorithm only performs two steps and always remains constant O(c). 
 
 Task 1:
-Task1.py was a little more complicated but I was able to break down the process into three functions.I am not sure if I am to add all the complexities together and give one final complexity but I am answering to the best of my ability.
-trimListtoNumber : has complexity 0(n + 4) and is linear. 
-combineList: just adds to list together 0(n)
-filterNumbers : has complexity 0(n + 2) and is is also linear. 
+This task was a little more complicated but I was able to break down the process into three functions. 
+
+trimListtoNumber:
+
+- Has one for loop that has complexity O(n). 
+- Has two list.append[] operations that combine to have complexity O(2). Since these are constants they can be ignored. Since only two operations happen, the complexity is constant O(c)
+- In total, the time complexity of this function is O(2) + O(n) =  O(n), as we drop the constants O(c). 
+- O(n)
+
+combineList: 
+
+- Adds two lists together as O(1) + O(1) and are constant
+- In total, the time complextiy of this function is O(n) as this is constant O(c). 
+- O(n)
+
+filterNumbers : 
+- Has one for loop that has complexity  O(n)
+- That has one additional operation O(1)
+- We can drop the O(1) and the complexity is O(n)
+- O(n)
+
+In total, after all functions, the time complexity is O(3n), since the 3n is constant, we can safley say the final time complexity of this program is O(n).
+
 
 Task 2:
-This task is far more complicated. I believe there could have been a better way to do this, but for the sake of code readability and organization, I sacrificed time complexity. Here are the breakdowns of each function. addSecondsToTimeSpent is by far the worst time function in this program because I have to append and convert seconds with numerous for loops. I could not find another way. 
-trimListToCol : 0(n + 2)
-trimSecondsFromTimeAnswered : 0(n + 4)
-addSecondsToTimeSpent : 0 (n^3 + 5) 
-organizerFilterFinalNumber : 0 (n + 3)
+This task is is about the same in complexity and I was able to break it down into two functions
+
+getTimeSpent:
+- has one for loop that has complexity O(n)
+- has four operations that add up to O(4)
+- Since O(4) can be concidered a constant
+- The final complexity of this function is O(n)
+
+filterForLongestCall:
+- has one operation that finds the max value, this operation has a complexity of O(n)
+- has one for loop that has complexity O(n)
+- has one additional operation that compares two values, has a complexity of O(1)
+
+In total, O(n) + O(n) + O(1) = O(n2) + O(1). If ignore drop all constants the final time complexity of this program is O(n).
+
 
 Task 3:
-Task3.py was the longest program and required a lot of functions and for loops to get the desired output. Because of this, there is a lot of room for improvement, but I tried my best to find the fastest solution.
-getCallers : 0 (n + 1)
-filterMobileNumbers : 0(n ^5 + 6) 
-filterTelemarketersNumbers : 0(n^3 + 2)
-filterFixedNumbers : 0 ( n ^3 + 4)
-orderCodes : 0(n + 2)
-getCallersOrRecievers 0 ( n ^2 + 2)
-getCallPercentage : 0(n + 3)
+Task3.py was the longest program and contained 6 functions. 
+getCallers : 
+- Has one for loop with O(n) complexity
+- Has one list.append operation that has complexity O(1)
+- Dropping all constants, final complexity is O(n)
+- O(n)
 
+filterMobileNumbers : 
+- has five for loops, O(5n)
+- has 5 additional operations O(5) 
+- final complexity is O(5n) + O(5) = O(n) after dropping constants. 
+- O(n)
+
+filterTelemarketersNumbers:
+- has three for loops, O(3n)
+- has three additional operations of O(3)
+- final complexity is O(3n) + O(3) = O(n) after dropping constants.
+- O(n)
+
+filterFixedNumbers :
+- has two for loops, O(2n)
+- has four additional operations of O(4)
+- final complexity is O(2n) + O(4) = O(n) after dropping constants.
+- O(n)
+
+orderCodes :
+- Has one four loop, O(n)
+- performs only 1 operation, O(1)
+- final complexity is O(n) + O(1) = O(n) after dropping constants.
+- O(n)
+
+getBalgalorCalls:
+- Has one for loop, O(n)
+- Has six operations at O(6)
+- final complexity is O(n) + O(6) = O(n) after dropping constants.
+- O(n)
+
+In Total Time complexty, each function is broken down to O(n)
+O(n) + O(n) + O(n) + O(n) + O(n) + O(n) = O(6n). If we ignore all constants, the final time complexity of this program is O(n). 
 
 Task 4:
-This task was the slowest speed and visual wise. There was a lot of filtering and stripping I had to do to get the telemarketer numbers. Maybe my understanding of the problem was too specific or wrong, but using my best judgement this is how I came up with the solution. StripNumbersFromCallingNumbers function does most of the work and completely slows the execution down. This is because unlike Task3.py (that filterNumber also has the same time complexity) StripNumbersFromCallingNumbers has to filter four lists. Making the execution time lag.
-getCallText : 0(n +1)
-StripNumbersFromCallingNumbers : 0(n ^ 5 + 6 )
+This task was the slowest speed and visual wise. There was a lot of filtering and stripping I had to do to get the telemarketer numbers. It contains only two functions. 
+
+getCallText : 
+- Has one for loop with O(n) complexity
+- Has one list.append operation that has complexity O(1)
+- Dropping all constants, final complexity is O(n)
+- O(n)
+
+StripNumbersFromCallingNumbers : 
+- has five for loops, O(5n)
+- has 5 additional operations O(5) 
+- final complexity is O(5n) + O(5) = O(n) after dropping constants. 
+- O(n) 
+
+In Total Time complexty, each function is broken down to O(n)
+O(n) + O(n)  = O(2n). If we ignore all constants, the final time complexity of this program is O(n). 
 
 
 
