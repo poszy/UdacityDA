@@ -25,11 +25,11 @@ combineList:
 
 filterNumbers : 
 - Has one for loop that has complexity  O(n)
-- That has one additional operation O(1)
-- We can drop the O(1) and the complexity is O(n)
-- O(n)
+- That has one additional operation that checks values, this makes the loop O(n^2)
+- We can drop the O(1) and the complexity is O(n^2)
+- O(n^2)
 
-In total, after all functions, the time complexity is O(3n), since the 3n is constant, we can safley say the final time complexity of this program is O(n).
+In total, after all functions, the time complexity is O(3n), since the 3n is constant, we can safley say the final time complexity of this program is O(n^2).
 
 
 Task 2:
@@ -50,45 +50,36 @@ In total, O(n) + O(n) + O(1) = O(n2) + O(1). If ignore drop all constants the fi
 
 
 Task 3:
-Task3.py was the longest program and contained 6 functions. 
+Task3.py was the longest program and contained 6 functions. But learning from my previous review. And after doing task 3B. I realized I could remove a lot of the for loops if I do
+conditional checking with just one for loop. a lesson learned well. So now I only have 4 functions. 
+
 getCallers : 
-- Has one for loop with O(n) complexity
+- Has one for loop with O(n) complexity but checks values making it O(n^2)
 - Has one list.append operation that has complexity O(1)
 - Dropping all constants, final complexity is O(n)
-- O(n)
+- O(n) + O(n^2)
+- worst case O(n^2)
 
-filterMobileNumbers : 
-- has five for loops, O(5n)
-- has 5 additional operations O(5) 
-- final complexity is O(5n) + O(5) = O(n) after dropping constants. 
-- O(n)
+filterForNumbers:
+- Has one for loop with O(n) complexity but has five additional checks making this O(n^2)
+- Has four list.append operation and one find operation that has complexity O(5)
+- Dropping all constants, final complexity is O(n^2)
+- O(n^2)
 
-filterTelemarketersNumbers:
-- has three for loops, O(3n)
-- has three additional operations of O(3)
-- final complexity is O(3n) + O(3) = O(n) after dropping constants.
-- O(n)
+orderCodes: 
+- Has one for loop with O(n) complexity, 
+- Has one sort operation that has complexity O(n log n) 
+- Dropping all constants, final complexity is O(n) + O(n log n) 
+- O(n log n) 
 
-filterFixedNumbers :
-- has two for loops, O(2n)
-- has four additional operations of O(4)
-- final complexity is O(2n) + O(4) = O(n) after dropping constants.
-- O(n)
+getBalgalorCalls : 
+- Has one for loop with O(n) complexity but has two additional checks making this O(n^2)
+- Has five operations that has complexity O(5)
+- Dropping all constants, final complexity is O(n) + O(n^2)
+- O(n^2) is worst case.
 
-orderCodes :
-- Has one four loop, O(n)
-- performs only 1 operation, O(1)
-- final complexity is O(n) + O(1) = O(n) after dropping constants.
-- O(n)
+In total, O(n^2) + O(n^2) + O(n^2) + O(n log n), dropping constants O(n^2) + O(n log n) is the final complexity
 
-getBalgalorCalls:
-- Has one for loop, O(n)
-- Has six operations at O(6)
-- final complexity is O(n) + O(6) = O(n) after dropping constants.
-- O(n)
-
-In Total Time complexty, each function is broken down to O(n)
-O(n) + O(n) + O(n) + O(n) + O(n) + O(n) = O(6n). If we ignore all constants, the final time complexity of this program is O(n). 
 
 Task 4:
 This task was the slowest speed and visual wise. There was a lot of filtering and stripping I had to do to get the telemarketer numbers. It contains only two functions. 
@@ -100,13 +91,13 @@ getCallText :
 - O(n)
 
 StripNumbersFromCallingNumbers : 
-- has five for loops, O(5n)
+- has 3 for loops, that have checks, this makes the time complexity O(n^2)
+- has two additional loops O(n)
 - has 5 additional operations O(5) 
-- final complexity is O(5n) + O(5) = O(n) after dropping constants. 
-- O(n) 
+- final complexity is O(5^2) + O(5) = O(n) after dropping constants. 
+- O(n^2) is the worst case scenario. 
 
-In Total Time complexty, each function is broken down to O(n)
-O(n) + O(n)  = O(2n). If we ignore all constants, the final time complexity of this program is O(n). 
+In total, O(n) + O(n^2), the worst case scenario makes this program quadratic. 
 
 
 
