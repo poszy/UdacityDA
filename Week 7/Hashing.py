@@ -45,6 +45,8 @@ class LinkedListNode:
     self.key = key
     self.value = value
     self.next = None
+  
+
 
 # For string abcde, a very effective function is treating this as a number of prime number base p
 # as an example, for number 578, we can represent this number in base 10
@@ -62,10 +64,12 @@ class LinkedListNode:
 
 class HashMap:
 
-  def __init__(self, initial_size=10):
+  def __init__(self, initial_size=15):
     self.bucket_array = [None for _ in range (initial_size)]
     self.p = 37
     self.num_entries = 0
+    self.load_factor = 0.7
+
 
   def put(self,key,value):
     # bucket index is = to get_hash_code(key)
@@ -90,6 +94,28 @@ class HashMap:
     new_node.next = head
     self.bucket_array[bucket_index] = new_node
     self.num_entries += 1
+
+  ## We used arrays to implement our hashmaps because arrays offer O(1) time complexity for both put and get operations
+  ## n is the number of each key-value pair entries
+  ## time complexity is always determined in terms of input size and not the actual amount of work that is being done independent of input size.
+  ## That "independent amount of work" will be constant for every input size so we disregard that.
+  ## In case of our hash function, the computation time for hash code depends on the size of each string
+  ## most of the strings will be around the same size when compared to this high number of entries. Hence, we can ignore the hash computation time in our analysis of time complexity.
+
+  ## Now, the entire time complexity essentialy depends on the linked list traversal.
+  ## In the worst case, all entries would go to the same bucket index and our linked list at that index would be huge.
+  ## Therefore, the time complexity in that scenario would be O(n). However, hash functions are wisely chosen so that this does not happen.
+
+  ## The distribution of entries is such that if we have n entries and b buckets, then each bucket does not have more than n/b key-value pair entries
+  ## Therefore, because of our choice of hash functions, we can assume that the time complexity is O(n/b)
+  ## This number which determines the load on our bucket array n/b is known as load factor.
+  ## Generally, we try to keep our load factor around or less than 0.7.
+  ## This essentially means that if we have a bucket array of size 10, then the number of key-value pair entries will not be more than 7.
+  # check for load factor
+    current_load_factor = self.num_entries / len(self.bucket_array)
+    if current_load_factor > self.load_factor:
+      self.num_entries = 0
+      self._rehash()
 
   def get(self,key):
     bucket_index = self.get_hash_code(key)
@@ -149,6 +175,35 @@ class HashMap:
 
   def size(self):
     return self.num_entries
+
+  def _rehash(self):
+    old_num_buckets = len(self.bucket_array)
+    old_bucket_array = self.bucket_array
+    num_buckets = 2 * old_num_buckets
+    self.bucket_array = [None for _ in range(num_buckets)]
+
+    for head in old_bucket_array:
+      while head is not None:
+        key = head.key
+        value = head.value
+        self.put(key, value)         # we can use our put() method to rehash
+        head = head.next
+
+  def delete(self, key):
+    bucket_index = self.get_bucket_index(key)
+    head = self.bucket_array[bucket_index]
+    previous = None
+    while head is not None:
+      if head.key == key:
+        if previous is None:
+          self.bucket_array[bucket_index] = head.next
+        else:
+          previous.next = head.next
+          self.num_entries -= 1
+          return
+      else:
+        previous = head
+        head = head.next
 
 hash_map = HashMap()
 
