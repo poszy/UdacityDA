@@ -40,6 +40,11 @@ def hash_function(string):
 hash_code_1 = hash_function("abcd")
 print(hash_code_1)
 
+class LinkedListNode:
+  def __init__(self,key,value):
+    self.key = key
+    self.value = value
+    self.next = None
 
 # For string abcde, a very effective function is treating this as a number of prime number base p
 # as an example, for number 578, we can represent this number in base 10
@@ -63,14 +68,66 @@ class HashMap:
     self.num_entries = 0
 
   def put(self,key,value):
-    pass
+    # bucket index is = to get_hash_code(key)
+    bucket_index = self.get_bucket_index(key)
+
+    # new_node has values passed in from parameters
+    new_node = LinkedListNode(key,value)
+
+    # head = this bucket_array with get_hash_code key value
+    head = self.bucket_array[bucket_index]
+
+    
+
+    # check if key is already present in the map, and update it's value
+    while head is not None:
+      if head.key == key:
+        head.value = value
+        return
+      head = head.next
+    # key not found in the chain --> create a new entry and place it at the head of the chain
+    head = self.bucket_array[bucket_index]
+    new_node.next = head
+    self.bucket_array[bucket_index] = new_node
+    self.num_entries += 1
 
   def get(self,key):
-    pass
+    bucket_index = self.get_hash_code(key)
+    head = self.bucket_array[bucket_index]
+    while head is not None:
+            if head.key == key:
+                return head.value
+            head = head.next
+    return None
 
   def get_bucket_index(self,key):
-    return self.get_hash_code(key)
+    bucket_index = self.get_hash_code(key)
+    return bucket_index
 
+  ## Comporession Function
+  # The values for unique objects are huge we cannot create such large arrays
+  # So we use another function - compression, to compress these valuse to create arrays of reasonable size
+
+  # A very simple, good and effective compression function can be mod(len(array). the modulo operator % returns the remainder
+  # of one number when divided by other
+  # if we have arrray of size 10, we can be sure that modulo of any number with 10 will be less that 10, allowing it to fit into our bucket array
+
+  # Because of modulo operator, we can write the logic in get_hash_code() instead of writting a compress function.
+
+  ## get_hash_code() function is satisfactory with the implementation of a compression function. but we are prone to collisions, because of compression
+  ## We have a bucket array of length 10 and we get two different hash codes for two different inputs, say 355, and 1095. Even though the hash codes are different in this case,
+  ## the bucket index will be same because of the way we have implemented our compression function. Such scenarios where multiple entries want to go to the same bucket are very common.
+  ## So, we introduce some logic to handle collisions
+
+  ## There are two popular ways in which we can handle collisions.
+  ## 1) closed addressing or separate chaining
+  ## Closed addressing a is a clever technique where we use the same bucket to store multiple objects, the bucket in this case will store a linked list of key-value pairs.
+  ## every bucket has its own separate chain of linked list nodes. 
+  ## 2) open addressing
+  ## in open addressing we do the following,
+  ### if, after getting the bucket index, the bucket is empty, we store the object in that particular bucket.
+  ### if the bucket is not empty, we find an alternate bucket index byu using another function which modifies the current hash code to gfive a new code. 
+  
   def get_hash_code(self,key):
     key = str(key)
     num_buckets = len(self.bucket_array)
@@ -80,12 +137,30 @@ class HashMap:
     for character in key:
       hash_code = hash_code + ord(character) * current_coefficient
 
+      # Compress hash_code
+      hash_code = hash_code % num_buckets
       current_coefficient = current_coefficient * self.p
-      current_coefficient = current_coefficient
 
-    return hash_code
+      # Compress coefficient
+      current_coefficient = current_coefficient % num_buckets
 
+    # Compress before returning 
+    return hash_code % num_buckets
+
+  def size(self):
+    return self.num_entries
 
 hash_map = HashMap()
-bucket_index = hash_map.get_bucket_index("abcd")
-print(bucket_index)
+
+hash_map.put("one", 1)
+hash_map.put("two", 2)
+hash_map.put("three", 3)
+hash_map.put("neo", 11)
+
+print("size: {}".format(hash_map.size()))
+
+
+print("one: {}".format(hash_map.get("one")))
+print("neo: {}".format(hash_map.get("neo")))
+print("three: {}".format(hash_map.get("three")))
+print("size: {}".format(hash_map.size()))
