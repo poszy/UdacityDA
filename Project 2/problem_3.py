@@ -1,50 +1,67 @@
 #!/usr/bin/python
 import sys
 
+class NodeTree(object):
+    def __init__(self, left=None, right=None):
+        self.left = left
+        self.right = right
 
-class Node:
+    def children(self):
+        return (self.left, self.right)
 
-  def __init__ (self, character, frequency):
-    self.character = character
-    self.frequency = frequency
-    self.right = None
-    self.left  = None
+    def nodes(self):
+        return (self.left, self.right)
 
-  def __str__(self):
-    return str(self.character)
-    return str(self.frequency)
-    return str(self.right)
-    return str(self.left)
-
-    __repr__ = __str__
-
-
+    def __str__(self):
+        return "%s_%s" % (self.left, self.right)
 
 
 def huffman_frequency(string):
 
   frequency_holder = {}
-  frequency_per_key = []
+  frequency_key = []
 
+  # Pull in string, check each char , if char does not exists
+  # add key to dict
+  for character in string:
+    if character not in frequency_holder.keys():
+      
+      frequency_holder[character] = 1
 
-  for i in string:
-
-    if i not in frequency_holder.keys():
-
-      frequency_holder[i] = 1
-
+  # Other wise, add +1 to its value
     else:
-      frequency_holder[i] = frequency_holder[i] + 1
-
-  i = 0
-  for character, frequency in frequency_holder.items():
-    frequency_per_key.append(Node(character,frequency))
-    print (frequency_per_key[i][i])
-    i = i +1
-
-  #return frequency_per_key
+      frequency_holder[character] = frequency_holder[character] + 1
 
 
+  # Sort the dictionary based on # of char appearances
+  frequency_holder = sorted(frequency_holder.items(), key=lambda x: x[1])
+  return frequency_holder
+  
+
+def huffman_build_tree(frequency_holder):
+ 
+  while len(frequency_holder) > 1 :
+
+    # Grab the least two occururing frequencies
+    least_freq = tuple(frequency_holder[0:2])
+
+    # Grab remaining frequecies
+    remaining_freq = frequency_holder[2:]
+
+    # combine the least two occurening frequencies
+    # add them to a branch
+    combined_freq = least_freq[0][0] + least_freq[1][0]
+
+    # add the combined branced to the end
+    frequency_holder = remaining_freq + [combined_freq, least_freq]
+    frequency_holder.sort(key=lambda t: t[0])
+
+  return False
+
+    
+
+  #print (remaining_freq)
+   
 
 def huffman_encoding(data):
     pass
@@ -70,4 +87,5 @@ if __name__ == "__main__":
     #print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
     #print ("The content of the encoded data is: {}\n".format(decoded_data))
 
-huffman_frequency("tthisss")
+frequency_holder = huffman_frequency("tthisss")
+huffman_build_tree(frequency_holder)
