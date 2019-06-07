@@ -7,7 +7,7 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.head = None
+       self.head = None
 
     def prepend(self, value):
         """ Prepend a value to the beginning of the list. """
@@ -65,7 +65,7 @@ class LinkedList:
             # if it does not, set the current node to the next,
             node = node.next
 
-   
+
     def remove(self, value):
         """ Remove first occurrence of value. """
         if self.head is None:
