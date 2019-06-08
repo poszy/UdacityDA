@@ -59,7 +59,7 @@ BlockChainName.prepend("MY-- my fault?! If you hadn't pushed me out of the windo
 BlockChainName.prepend("OHH yeah?! Well if YOU hadn't shown up inside your stupid little cardboard spaceship and taken away everything that was important to me--")
 BlockChainName.prepend("Don't talk to me about importance! Because of you, the security of this entire universe is in jeopardy!")
 BlockChainName.prepend("WHAT?! What are you talking about?! ")
-BlockChainName.prepend("Right now, poised at the edge of the galaxy, Emperor Zurg has been secretly building a weapon with the destructive capacity to annihilate an entire planet! I alone have information that reveals this weapon's only weakness. And you my friend, are responsible for delayin' my rendezous with Star Command! ")
+BlockChainName.prepend("Right now, poised at the edge of the galaxy, Emperor Zurg has been secretly building a weapon with the destructive capacity to annihilate an entire planet! I alone have information that reveals this weapon's only weakness. And you my friend, are responsible for d2elayin' my rendezous with Star Command! ")
 BlockChainName.prepend("YOU-ARE-A-TOOOOOYY!!! You aren't the real Buzz Lightyear, you're-- oh, you're an action figure! You are a child's play thing!")
 BlockChainName.prepend("You are a sad, strange little man. And you have my pity. Farewell.")
 BlockChainName.prepend("Oh, yeah?! Well, good riddance, ya looney! [Muttering to himself] Rendezous with Star Command!")
