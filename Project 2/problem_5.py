@@ -2,6 +2,8 @@
 
 import hashlib
 import datetime
+import time
+
 
 class MainBlock:
   
@@ -13,7 +15,8 @@ class MainBlock:
 
   def calc_hash(self):
     sha = hashlib.sha256()
-    hash_str = "We are going to encode this string of data!".encode('utf-8')
+    hashed_string = str(self.timestamp)
+    hash_str = hashed_string.encode('utf-8')
     sha.update(hash_str)
     return sha.hexdigest()
 
@@ -46,8 +49,6 @@ class LinkedListBlock:
       self.tail.next = BlockNode(createBlock)
       self.tail = self.tail.next
 
-
-
 BlockChainName = LinkedListBlock()
 BlockChainName.prepend("According to my navi-computer, the--")
 BlockChainName.prepend("Shut up! Just shut up you idiot!")
@@ -66,7 +67,7 @@ BlockChainName.prepend("Oh, yeah?! Well, good riddance, ya looney! [Muttering to
 BlockNode = BlockChainName.head
 BlockIndexCount = 1
    
-while BlockNode:
+while BlockNode is not None:
   blockNode = BlockNode.value
   print (BlockIndexCount)
   print (blockNode.previous_hash)
