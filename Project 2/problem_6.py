@@ -66,24 +66,22 @@ def union(llist, llistt):
     l2 = llistt.to_list()
     l3 = l1 + l2
     masterList = []
-    print (sorted(l1))
-    print (sorted(l2))
-    print (sorted(l3))
+
 
     for character in l3:
         if character not in masterList:
             masterList.append(character)
-    print("_________________________________________")
+    
     return sorted(masterList)
     
     
-
+def intersection(llist, llistt):
+    l1 = llist.to_list()
+    l2 = llistt.to_list()
+    l3 = [value for value in l1 if value in l2]
     
-    
-
-def intersection(llist_1, llist_2):
-    
-    pass
+    #print (l3)
+    return l3
 
     
 # Test case 1
@@ -101,7 +99,7 @@ for i in element_2:
     linked_list_2.append(i)
 
 print (union(linked_list_1,linked_list_2))
-#print (intersection(linked_list_1,linked_list_2))
+print (intersection(linked_list_1,linked_list_2))
 
 # Test case 2
 
@@ -118,4 +116,20 @@ for i in element_2:
     linked_list_4.append(i)
 
 print (union(linked_list_3,linked_list_4))
-#print (intersection(linked_list_3,linked_list_4))
+print (intersection(linked_list_3,linked_list_4))
+
+# Test case 3
+linked_list_3 = LinkedList()
+linked_list_4 = LinkedList()
+
+element_1 = [2,0,4,9,6,12,11,6,4,3,1]
+element_2 = [1,7,8,9,11,21,1,11,11,12,13,15,16,12]
+
+for i in element_1:
+    linked_list_3.append(i)
+
+for i in element_2:
+    linked_list_4.append(i)
+
+print (union(linked_list_3,linked_list_4))
+print (intersection(linked_list_3,linked_list_4))

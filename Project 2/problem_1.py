@@ -49,23 +49,18 @@ class LRU_Cache(object):
         
 our_cache = LRU_Cache(5)
 
-our_cache.set(1, 1)
-our_cache.set(2, 2)
-our_cache.set(3, 3)
-our_cache.set(8, 2)
-our_cache.set(1, 1)
-#our_cache.set(1, 1)
-
-#our_cache.set(14, 2)
-#our_cache.set(42, 2)
-#our_cache.set(12, 2)
-#our_cache.set(7, 2)
-#our_cache.set(71, 2)
-
+our_cache.set(1, 1) # Adding Key 1
+our_cache.set(2, 2) # Adding Key 2
+our_cache.set(3, 3) # Adding Key 3
+our_cache.set(8, 2) # Adding Key 8
+our_cache.set(1, 1) # Key already in dictionary
+our_cache.set(2, 2) # Key already in dictionary
+our_cache.set(6, 6) # Adding Key 6
+our_cache.set(7, 7) # List too large , popping last used element0
 
 our_cache.get(1)       # returns 1
 our_cache.get(2)       # returns 2
 our_cache.get(3)       # return -1
-print(our_cache.mDict)
-print(len(our_cache.mDict))
+our_cache.get(6)       # returns -1
+
 
