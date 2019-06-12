@@ -1,0 +1,1 @@
+For this problem I used a list for simplicity, there was really not another data structure I could use that made sense. The time complexity of this should be O(n) since I am itterating over the list elements. The space complexity is also O(n) as the list contains only an array with a nested array. 

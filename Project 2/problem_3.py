@@ -54,9 +54,7 @@ def huffman_trim_tree(huffman_build_tree):
                 huffman_trim_tree(node_value[1]))
 
 def huffman_set_codes(node, space =''):
-    
-    global codes
-    
+
     if type(node) == type(""):
         codes[node] = space
     else:
@@ -64,32 +62,32 @@ def huffman_set_codes(node, space =''):
         huffman_set_codes(node[1], space + "1")
 
 def huffman_encode_helper(string):
-  
+
     encoder = ""
-    
+
     for character in string :
-      
+
         encoder = encoder + codes[character]
 
     return encoder
 
 def huffman_decode_helper(huffman_tree, string):
-  
+
     decoder = ""
     node = huffman_tree
-    
+
     for decimal in string :
-      
-        if decimal == '0' : 
+
+        if decimal == '0' :
             node = node[0]
-            
-        else: 
+
+        else:
             node = node[1]
-            
-        if type(node) == type("") :  
-            decoder = decoder + node              
+
+        if type(node) == type("") :
+            decoder = decoder + node
             node = huffman_tree
-            
+
     return decoder
 
 def huffman_encoding(string):
@@ -100,15 +98,14 @@ def huffman_encoding(string):
     nodes = huffman_frequency(string)
     tree  = huffman_build_tree(nodes)
     trimed_tree = huffman_trim_tree(tree)
-    
+
     if len(trimed_tree) == 1:
         codes[trimed_tree] = "0"
-        
+
     else:
         huffman_set_codes(trimed_tree)
-        
+
     return (huffman_encode_helper(string),trimed_tree)
-    
 
 def huffman_decoding(string, huffman_tree):
     if string == None or string == "":

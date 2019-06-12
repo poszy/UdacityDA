@@ -1,0 +1,1 @@
+For this  I used a recursive function that will scan the current path + the next folder/file in its path until there is no more available paths. The time complexity of this function is quadratic O(n^2) because of the nested if statements inside the for loops. the space complexity is O(n) while n is the number of paths. 

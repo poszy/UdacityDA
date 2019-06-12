@@ -13,14 +13,15 @@ class LRU_Cache(object):
         self.output = None
 
     def get(self, key):
-        # Retrieve item from provided key. Return -1 if nonexistent. 
+
+        # Retrieve item from provided key. Return -1 if nonexistent.
 
         if key in self.mDict and key == 1:
             self.output = self.mDict[1]
 
         elif key in self.mDict and key == 2:
             self.output = self.mDict[2]
-             
+
         else:
             self.output = -1
 
@@ -29,9 +30,9 @@ class LRU_Cache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
-       
+
         if len(self.mDict) < self.size:
-            
+
             if key in self.mDict:
                 print ("Key in already in Dict")
                 return
@@ -39,14 +40,13 @@ class LRU_Cache(object):
                 print("Adding key " + str(key))
                 self.mDict[key] = value
                 self.history.append(key)
-           
+
         elif len(self.mDict) == self.size:
             oldest = self.history.pop(0)
             del self.mDict[oldest]
             print("List is too large, popping last used element")
             self.mDict[key] = value
-            
-        
+
 our_cache = LRU_Cache(5)
 
 our_cache.set(1, 1) # Adding Key 1

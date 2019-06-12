@@ -61,31 +61,28 @@ class LinkedList:
         return out
 
 def union(llist, llistt):
-    # Your Solution Here
+
     l1 = llist.to_list()
     l2 = llistt.to_list()
     l3 = l1 + l2
     masterList = []
 
-
     for character in l3:
         if character not in masterList:
             masterList.append(character)
-    
+
     return sorted(masterList)
-    
-    
+
 def intersection(llist, llistt):
+
     l1 = llist.to_list()
     l2 = llistt.to_list()
     l3 = [value for value in l1 if value in l2]
-    
-    #print (l3)
+
     return l3
 
-    
-# Test case 1
 
+# Test case 1
 linked_list_1 = LinkedList()
 linked_list_2 = LinkedList()
 
@@ -102,7 +99,6 @@ print (union(linked_list_1,linked_list_2))
 print (intersection(linked_list_1,linked_list_2))
 
 # Test case 2
-
 linked_list_3 = LinkedList()
 linked_list_4 = LinkedList()
 

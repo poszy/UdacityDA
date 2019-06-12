@@ -1,0 +1,1 @@
+For this problem I also used a linked list, the operations are O(1) except for the to_list operation. The time complexity of this program is O(n) as I have to iterate through the converted list. I chose to use a list converted from the lnked list for code simplicity. The space complexity is O(n), based on the length of the list. 

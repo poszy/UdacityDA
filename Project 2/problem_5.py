@@ -6,7 +6,7 @@ import time
 
 
 class MainBlock:
-  
+
   def __init__(self, data, previous_hash):
     self.timestamp = self.calc_time()
     self.data = data
@@ -40,7 +40,6 @@ class LinkedListBlock:
       createBlock = MainBlock(data, None)
       self.head = BlockNode(createBlock)
       self.tail = self.head
-      
 
     else:
       createBlock = MainBlock( data, self.tail.value.hash)
@@ -48,7 +47,7 @@ class LinkedListBlock:
       self.tail = self.tail.next
 
 def create_block(BlockChainName):
-  
+
   BlockChainName = LinkedListBlock()
   BlockChainName.prepend("According to my navi-computer, the--")
   BlockChainName.prepend("Shut up! Just shut up you idiot!")
@@ -76,7 +75,7 @@ def create_block(BlockChainName):
     print (blockNode.data)
     BlockNode  = BlockNode.next
     BlockIndexCount = BlockIndexCount + 1
-    
+
 # Test Case 1
 create_block("BlockChainName")
 

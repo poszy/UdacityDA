@@ -1,0 +1,1 @@
+For this problem I used a linked list to connect each block. This made is easier to add "blocks". The time complexity of this problem should be O(1), as the prepend method simply adds a "block". The space complexity is O(n), the size of the linkedlist is to be determined. 

@@ -1,0 +1,1 @@
+For this problem I use a dictionary to keep track of a stack. I used this structure for code simplicity and because most of the dictionary operations are O(1) for this case, all of my operations are O(1). The space complexity is O(n) because of the size of the cache/set. 

@@ -26,9 +26,6 @@ class Group(object):
     __repr__ = __str__
 
 
-
-
-
 def is_user_in_group(user, group):
     """
     Return True if user is in the group, False otherwise.
