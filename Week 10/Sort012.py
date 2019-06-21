@@ -8,7 +8,6 @@ def sort_012(input_list):
     # initialize pointers for next positions of 0 and 2
     next_pos_0 = 0
     next_pos_2 = len(input_list) - 1
-
     front_index = 0
 
     while front_index <= next_pos_2:
@@ -29,6 +28,7 @@ def sort_012(input_list):
 def test_function(test_case):
     sort_012(test_case)
     print(test_case)
+
     if test_case == sorted(test_case):
         print("Pass")
     else:
