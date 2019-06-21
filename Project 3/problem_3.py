@@ -1,5 +1,29 @@
 #!/usr/bin/python
 
+def recursive_binary_search(number_list, left, right, number):
+
+  if left > right:
+    return -1;
+
+  mid = left + (right - left) // 2
+
+  if number == number_list[mid]:
+    return mid
+
+  if number_list[left] <= number_list[mid]:
+
+    if number_list[left] <= number and number < number_list[mid]:
+      recursive_binary_search(number_list, left, mid -1, number)
+
+    else:
+      return recursive_binary_search(number_list, mid+1, right, number)
+
+  else:
+    if number_list[mid] < number and number <= number_list[right]:
+      return recursive_binary_search(number_list, mid + 1, right, number)
+
+    else:
+      return recursive_binary_search(number_list, left, mid -1, number)
 
 
 def rotated_array_search(input_list, number):
@@ -12,9 +36,8 @@ def rotated_array_search(input_list, number):
        int: Index or -1
     """
 
-    pass
-   
-    
+    return recursive_binary_search(input_list, 0, len(input_list)-1, number)
+
 def linear_search(input_list, number):
     for index, element in enumerate(input_list):
         if element == number:
@@ -37,22 +60,11 @@ test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 
 
 
-def recursive_binary_search(target, source, left=0):
-    if len(source) == 0:
-        return None
-    center = (len(source)-1) // 2
-    if source[center] == target:
-        return center + left
-    elif source[center] < target:
-        return recursive_binary_search(target, source[center+1:], left+center+1)
-    
-    else:
-        return recursive_binary_search(target, source[:center], left)
 
 
 
 multiple = [6, 7, 8, 9, 10, 1, 2, 3, 4]
-print(recursive_binary_search(6, multiple))
+print(recursive_binary_search(multiple,0,0,6))
 
 multiple = [6, 7, 8, 9, 10, 1, 2, 3, 4]
-print(recursive_binary_search(1, multiple))
+print(recursive_binary_search(multiple,0,0,7))
