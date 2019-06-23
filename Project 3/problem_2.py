@@ -1,5 +1,26 @@
 #!/usr/bin/python
 
+def recursive_binary_search(number_list, left, right, number):
+
+  if left > right:
+    return -1
+
+  mid = (left + right) // 2
+
+  if number_list[mid] == number:
+    return mid
+
+  if number_list[left] <= number_list[mid]:
+
+    if number >= number_list[left] and number <= number_list[mid]:
+      return recursive_binary_search(number_list, left, mid -1, number)
+    return recursive_binary_search(number_list, mid + 1, right, number)
+
+  if number >= number_list[mid] and number <= number_list[right]:
+    return recursive_binary_search(number_list, mid + 1, right, number)
+  return recursive_binary_search(number_list, left, mid - 1, number)
+
+
 def rotated_array_search(input_list, number):
     """
     Find the index by searching in a rotated sorted array
@@ -9,7 +30,8 @@ def rotated_array_search(input_list, number):
     Returns:
        int: Index or -1
     """
-    pass
+
+    return recursive_binary_search(input_list, 0, len(input_list)-1, number)
 
 def linear_search(input_list, number):
     for index, element in enumerate(input_list):
