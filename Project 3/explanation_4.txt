@@ -1,0 +1,7 @@
+For this problem I simply iterated through the list without having to do any
+complicated sorting.
+
+Function Breakdown:
+ sort_012(input_list): Time complexity O(n) and space complexity is O(1)
+
+Total time complexity is O(n) since I am only iterating through the list once.

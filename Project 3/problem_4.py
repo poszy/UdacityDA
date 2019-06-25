@@ -11,10 +11,7 @@ def sort_012(input_list):
     # Keep track of positions
     position_zero = 0
     position_two  = len(input_list) - 1
-
     front_index   = 0
-
-
 
     while front_index <= position_two:
 

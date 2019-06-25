@@ -1,0 +1,8 @@
+For this problem I was able to use a binary search to find the solution. By definition Binary search worst case is O(Log N).
+
+
+ Base case: O(1)
+ While Loop: O(LogN)
+ control flow statements: O(1)
+
+ Over all the worst case complexity is O(Log N) and the space complexity is O(1) since I am only taking in an integer. 

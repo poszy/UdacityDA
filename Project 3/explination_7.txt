@@ -1,0 +1,13 @@
+Very similar to problem_5, with only a few extra variables and flow constrol statements, the overall complexity is O(M) * O(Log N)
+
+A Trie and BST will need time proportional to O(M) * O(Log N).
+M is the maximum length of the strings (words) and N is the number of keys in a tree.
+
+General function breakdown:
+ insert() & find(): O(M) and space complexity is O(n) * the number of words in a given route
+ handler(self, path, handler): time complexity is O(M) and space time complexity is O(1)
+ lookup(self,path): time complexity is O(M) and space time complexity is O(1)
+ split_path(self, path): time complexity is O(M) and space time complexity is O(1)
+
+
+Worst case time complexity O(M) * O(Log N)

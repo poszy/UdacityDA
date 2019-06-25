@@ -20,10 +20,10 @@ def sqrt(number):
         mid = (start + end) //2
 
         dmid = mid*mid
-        
+
         if dmid == number:
             return mid
-        
+
         if dmid < number:
             start = mid + 1
             floor = mid
@@ -32,7 +32,6 @@ def sqrt(number):
             end = mid - 1
 
     return floor
-            
 
 print ("Pass" if  (3 == sqrt(9)) else "Fail")
 print ("Pass" if  (0 == sqrt(0)) else "Fail")

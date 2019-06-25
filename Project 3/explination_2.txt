@@ -1,0 +1,10 @@
+Again, By definition Binary search worst case is O(Log N). I was able to complete this problem in O(Log N)
+
+Function breakdown:
+
+ recursive_binary_search(number_list, left, right, number): this is recursive binary search that has a complexity O(Log N). Space complexity O(1) * 3, ignoring constants is O(1)
+
+ rotated_array_search(input_list, number): Time complexity O(1), space complexity O(1)
+
+
+ Over all the worst case complexity is O(Log N) and the space complexity is O(1) since I am only taking in a list.

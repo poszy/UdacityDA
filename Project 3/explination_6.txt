@@ -1,0 +1,7 @@
+For this problem the expected time complexity is O(n).
+I was able to achieve this by iterating through the list once.
+
+Function breakdown:
+ get_min_max(ints): Time complexity O(n) . Space complexity O(1)
+
+Overall the time complexity is O(n)

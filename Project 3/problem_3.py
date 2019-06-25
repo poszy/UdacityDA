@@ -3,7 +3,7 @@
 def mergesort(items):
     if len(items) <= 1:
         return items
-    
+
     mid = len(items) // 2
     left = items[:mid]
     right = items[mid:]
@@ -52,10 +52,10 @@ def rearrange_digits(input_list):
 
         if i % 2 == 0:
             l1.append(a[i])
-      
+
         else:
             l2.append(a[i])
-            
+
     x = int("".join(map(str, l1)))
     y = int("".join(map(str, l2)))
     return  x , y
