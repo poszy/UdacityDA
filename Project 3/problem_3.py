@@ -3,6 +3,7 @@
 def mergesort(items):
     if len(items) <= 1:
         return items
+    
     mid = len(items) // 2
     left = items[:mid]
     right = items[mid:]
