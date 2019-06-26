@@ -3,6 +3,6 @@ M is the maximum length of the strings (words) and N is the number of keys in a 
 
 General function breakdown:
  insert() & find(): O(M) and space complexity is O(n) * the number of letters in a word
- suffixes() & get_suffix(): O(M) and space complexity is O(n) * the number of letters of all words.
+ suffixes() O(M) and space complexity is O(n) * the number of letters of all words.
 
 Worst case  time complexity O(M) * O(Log N)
