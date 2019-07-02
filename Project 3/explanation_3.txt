@@ -3,7 +3,7 @@ For the solution I used a merge sort to sort the list and used simple modulus lo
 
 function breakdown:
  mergesort(items): Time complexity is O(n) because of the list iteration and space complexity is O(1)
- mergesort(items): while loop is O(log n) and space complexity is O(1) * 4, ignoring constants is space complexity is O(1)
+ merge(left,right): while loop is O(log n) and space complexity is O(n) * 4, ignoring constants is space complexity is O(n)
  rearrange_digits(input_list): Time complexity is O(n) and space complexity is O(1)
 
  Overall: the worst time complexity is O(nlog(n)) because of the merge sort.

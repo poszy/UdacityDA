@@ -7,7 +7,7 @@ General function breakdown:
  insert() & find(): O(M) and space complexity is O(n) * the number of words in a given route
  handler(self, path, handler): time complexity is O(M) and space time complexity is O(1)
  lookup(self,path): time complexity is O(M) and space time complexity is O(1)
- split_path(self, path): time complexity is O(M) and space time complexity is O(1)
+ split_path(self, path): time complexity is O(M) and space time complexity is O(n), because of the lenght of the path
 
 
 Worst case time complexity O(M) * O(Log N)
